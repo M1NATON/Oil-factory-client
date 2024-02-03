@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 
 function App() {
     return (
-        <div className='container mx-auto'>
+        <div className='w-[1100px] mx-auto'>
             <Header/>
             <AppRouter/>
             <Footer/>

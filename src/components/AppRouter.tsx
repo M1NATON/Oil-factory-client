@@ -12,7 +12,7 @@ const AppRouter = () => {
     return (
         <div>
             <Routes>
-                <Route path='/home' element={<HomePage/>} key='/home'/>
+                <Route path='/' element={<HomePage/>} key='/'/>
                 <Route path='/about' element={<AboutPage/>} key='/about'/>
                 <Route path='/admin' element={<AdminPage/>} key='/admin'/>
                 <Route path='/contact' element={<ContactPage/>} key='/contact'/>

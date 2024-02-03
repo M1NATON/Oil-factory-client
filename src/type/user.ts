@@ -25,6 +25,7 @@ interface LoadingUserAction {
     type: UserActionType.FETCH_LOADING_USER
 }
 
+
 interface SetUserAction {
     type: UserActionType.FETCH_SET_USER
     payload: IUser

@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, TextField} from "@mui/material";
-import Login from "./authorization/Login";
 import {useAction} from "../hooks/useAction";
 
 const Authorization = () => {
     const [loginChek, setLoginChek] = useState(true)
+    const [createUser, setCreateUser] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const {login} = useAction()
+    const [lastName, setLastName] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const {login, registration, auth} = useAction()
     const emailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
         setEmail(e.target.value)
@@ -18,10 +20,32 @@ const Authorization = () => {
         setPassword(e.target.value)
     }
 
+    const lastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        setLastName(e.target.value)
+    }
+
+    const firstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        setFirstName(e.target.value)
+    }
+
+    useEffect(() => {
+        auth()
+    }, []);
     const btnLogin = (e: React.FormEvent) => {
         e.preventDefault()
-        console.log(email, password)
         login(email, password)
+    }
+
+    const btnRegistration = (e: React.FormEvent) => {
+        e.preventDefault()
+        registration(lastName, firstName, email, password)
+        setLoginChek(true)
+        setCreateUser(true)
+        setTimeout(()=> {
+            setCreateUser(false)
+        }, 2000)
     }
 
     return (
@@ -52,16 +76,16 @@ const Authorization = () => {
                             <div className=''>
                                 <div className='mb-2 mx-auto'>
                                     <TextField id="outlined-basic" label="Фамилия" variant="outlined"
-                                               size="small"/>
+                                               size="small" onChange={lastNameChange} value={lastName}/>
                                 </div>
                                 <div className='mb-2'>
-                                    <TextField id="outlined-basic" label="Имя" variant="outlined" size="small"/>
+                                    <TextField id="outlined-basic" label="Имя" variant="outlined" size="small" onChange={firstNameChange} value={firstName}/>
                                 </div>
                                 <div className='mb-2'>
-                                    <TextField id="outlined-basic" label="Email" variant="outlined" size="small"/>
+                                    <TextField id="outlined-basic" label="Email" variant="outlined" size="small" onChange={emailChange} value={email}/>
                                 </div>
                                 <div>
-                                    <TextField id="outlined-basic" label="Пароль" variant="outlined" size="small"/>
+                                    <TextField id="outlined-basic" label="Пароль" variant="outlined" size="small" onChange={passwordChange} value={password}/>
                                 </div>
                             </div>
 
@@ -70,15 +94,16 @@ const Authorization = () => {
                                         className='text-[14px] text-gray-400 hover:text-gray-500 transition-all'>Войти!</span>
                             </button>
                             <div className='flex justify-start'>
-                                <Button variant="contained">Зарегистрироваться</Button>
+                                <Button variant="contained" onClick={btnRegistration}>Зарегистрироваться</Button>
                             </div>
 
 
                         </div>
                     )
             }
-
-
+            {
+                createUser && <p className='text-center text-green-600'>Вы успешно зарегистрированы!</p>
+            }
         </div>
     );
 };

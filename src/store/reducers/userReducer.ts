@@ -20,7 +20,7 @@ export const userReducer = (state = initialState, action: UserAction): UserState
             localStorage.removeItem('token')
             return {...state, isAuth: false}
         case UserActionType.FETCH_SET_USER:
-            return {...state, user: action.payload}
+            return {...state, user: action.payload, isAuth: true}
         default:
             return state
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Authorization from "../components/Authorization";
 import {useTypeSelector} from "../hooks/useTypeSelector";
 import {useAction} from "../hooks/useAction";
@@ -7,10 +7,15 @@ import {useAction} from "../hooks/useAction";
 const DashboardPage = () => {
 
     const {isAuth} = useTypeSelector(state => state.user)
-    const {logout} = useAction()
+    const {logout, auth} = useAction()
     const btnExit = () => {
         logout()
     }
+
+    useEffect(() => {
+        auth()
+        console.log('auth')
+    }, []);
     console.log(isAuth)
     return (
         <div>
