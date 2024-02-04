@@ -9,7 +9,7 @@ const Header = () => {
     const liStyle = 'hover:bg-yellow-400 hover:text-blue-700 px-4 py-2 rounded-3xl transition-all'
 
      return (
-        <div className='h-[45px] py-2 px-5 text-[13px] flex justify-between items-center'>
+        <div className='h-[45px] top-0 w-[1150px] bg-amber-50 py-2 px-5 z-20 text-[13px] fixed flex justify-between items-center'>
             <div className='px-2 py-4 w-[250px]'>
                 <img className='w-[30px]' src={logo} alt="Logo"/>
             </div>

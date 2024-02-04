@@ -18,7 +18,7 @@ const DashboardPage = () => {
     }, []);
     console.log(isAuth)
     return (
-        <div>
+        <div className='mb-[250px]'>
             <h1 className='text-center text-3xl mt-10 mb-20'>Личный кабинет</h1>
             {
                 isAuth ? (<button onClick={btnExit}>Выйти</button>) : <Authorization/>

@@ -31,16 +31,27 @@ import i3 from '../assets/home-page/i-2.png'
 // @ts-ignore
 import i4 from '../assets/home-page/i-3.png'
 
+
+// @ts-ignore
+import service1 from '../assets/home-page/Услуги/item1.png'
+// @ts-ignore
+import service2 from '../assets/home-page/Услуги/item2.png'
+// @ts-ignore
+import service3 from '../assets/home-page/Услуги/item3.png'
+
+
+
 const HomePage = () => {
     return (
         <div>
-            <div className='flex justify-between mt-[65px] mb-[100px]'>
+            <div className='flex bg-gray-50 justify-between  mb-[100px]'>
+                <p className='absolute left-0 bg-gray-50 w-[100%] h-[50%] z-[1]'></p>
                 <div>
-                    <img src={oil} alt="" className='w-[450px]'/>
+                    <img src={oil} alt="" className='z-[3] w-[650px] absolute left-[275px]'/>
                 </div>
-                <img src={back} alt="" className='absolute z-[-1] top-[280px]'/>
-                <div className='w-[700px]'>
-                    <div className='flex items-center  mx-auto w-[550px] justify-between font-bold mb-[60px]'>
+                <img src={back} alt="" className='absolute z-[2] top-[280px]'/>
+                <div className='w-[600px] z-[3]'>
+                    <div className='flex items-center  mx-auto w-[550px] justify-between font-bold mb-[100px]'>
                         <div className=''>
                             <img src={logo} className='w-[150px]' alt=""/>
                         </div>
@@ -52,9 +63,9 @@ const HomePage = () => {
                         </div>
                     </div>
                     <div className='mb-[73px]'>
-                        <p className='text-white text-[17px]'>Подсолнечное масло, изготовленное маслозаводом ООО
+                        <p className='text-white text-[17px] font-bold'>Подсолнечное масло, изготовленное маслозаводом ООО
                             «AGROMIR» из
-                            города Кропоткина Краснодарского края вы можете приобрести в России,
+                            города Оренбург Оренбургской области вы можете приобрести в России,
                             странах СНГ и в странах дальнего зарубежья.
                             Наша продукция продается под торговыми марками «Оренбурское
                             отборное», «AGROMIR».
@@ -83,11 +94,11 @@ const HomePage = () => {
                     </div>
                 </div>
             </div>
-            <div className='w-[1150px] mb-[150px]'>
-                <h1 className='text-[36px] uppercase font-bold'>Преимущества нашего масла</h1>
-                <p className='text-[14px] text-[#696969] uppercase mb-[30px]'>Почему покупатели выбирают именно наши масла</p>
+            <div className='z-[4] w-[1150px] mb-[60px]'>
+                <h1 className='text-[36px] z-[3] uppercase font-bold'>Преимущества нашего масла</h1>
+                <p className='text-[14px] z-[3] text-[#696969] uppercase mb-[30px]'>Почему покупатели выбирают именно наши масла</p>
 
-                <div className='text-white flex gap-0 justify-center'>
+                <div className='z-[3] text-white flex gap-0 justify-center'>
 
 
                     <div className='relative w-[287px] h-[307px]'>
@@ -132,6 +143,37 @@ const HomePage = () => {
                     </div>
 
 
+                </div>
+            </div>
+            <div className='mb-[100px]'>
+                <h1 className='text-[36px] uppercase font-bold'>УСЛУГИ МАСЛОЗАВОДА «AGROMIR»</h1>
+                <p className='text-[14px] text-[#696969] uppercase mb-[30px]'>ОКАЗЫВАЕМ УСЛУГИ ПО РАФИНАЦИИ, ДЕЗОДОРАЦИИ, РОЗЛИВУ И ФАСОВКЕ МАСЛА ПОДСОЛНЕЧНОГО</p>
+                <div className='flex flex-wrap'>
+                    <div className='flex w-[560px] gap-[15px] mr-[10px] mb-[30px]'>
+                        <div><img src={service1} alt="" className='w-[270px] h-[130px]'/></div>
+                        <div className='w-[280px]'>
+                            <h1 className='text-[24px] font-medium'>ФАСОВКА</h1>
+                            <p>Фасовка масла осуществляется в ПЭТ бутылки вместимостью 0.9л, 1л, 1.8л, 2л, 2.7л, 4.5л и
+                                5 литров</p>
+                        </div>
+                    </div>
+
+                    <div className='flex w-[560px] gap-[15px] mr-[10px]'>
+                        <div><img src={service2} alt="" className='w-[270px] h-[130px]'/></div>
+                        <div className='w-[280px]'>
+                            <h1 className='text-[24px] font-medium'>ЭТИКЕТКА</h1>
+                            <p>Возможна упаковка продукции под Вашей торговой маркой.</p>
+                        </div>
+                    </div>
+
+
+                    <div className='flex  gap-[15px] mr-[10px]'>
+                        <div><img src={service3} alt="" className='w-[270px] h-[130px]'/></div>
+                        <div className=''>
+                            <h1 className='text-[24px] font-medium'>ДОСТАВКА</h1>
+                            <p>Доставляем подсолнечное масло по России и за рубеж автомобильным, морским и железнодорожным транспортом.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

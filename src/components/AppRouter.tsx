@@ -10,7 +10,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 
 const AppRouter = () => {
     return (
-        <div>
+        <div className='mt-[50px]'>
             <Routes>
                 <Route path='/' element={<HomePage/>} key='/'/>
                 <Route path='/about' element={<AboutPage/>} key='/about'/>
