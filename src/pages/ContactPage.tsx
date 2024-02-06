@@ -1,10 +1,10 @@
 import React from 'react';
 // @ts-ignore
 import headerBack from '../assets/Production/header-back.png'
+import InquiriesForm from "../components/forms/InquiriesForm";
 
 const ContactPage = () => {
 
-    const inputStyle = 'py-2 px-2 outline-0 w-[45%] mb-5'
 
     return (
         <div>
@@ -84,27 +84,8 @@ const ContactPage = () => {
                             Мы ответим вам в самое ближайшее время.
                         </p>
 
+                        <InquiriesForm/>
 
-                        <form>
-                            <div className='flex flex-wrap justify-between mb-10'>
-                                <input type="text" placeholder='Имя' className={inputStyle}/>
-                                <input type="text" placeholder='Название вашей организации' className={inputStyle}/>
-                                <input type="number" placeholder='Телефон' className={inputStyle}/>
-                                <input type="text" placeholder='E-mail' className={inputStyle}/>
-                                <textarea name="" id="" cols={65} rows={10} className='p-4' placeholder='Ваше сообщение' style={{resize: 'none'}}></textarea>
-                            </div>
-                            <div className='flex justify-end'>
-                                <button
-                                    className='py-2 w-[45%] px-12 text-black text-[14px] font-[700]'
-                                    style={{
-                                        background:' linear-gradient(99.81deg, #fff3b4 0%, #efe164 33.01%, #ffca64 67.37%)',
-                                        textShadow: '0px 1px 0 #fff3b4'
-                                    }}
-                                >
-                                    Отправить
-                                </button>
-                            </div>
-                        </form>
                     </div>
                 </div>
 

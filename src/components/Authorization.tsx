@@ -1,51 +1,54 @@
 import React, {useEffect, useState} from 'react';
-import {Button, TextField} from "@mui/material";
+import {Alert, Button, TextField} from "@mui/material";
 import {useAction} from "../hooks/useAction";
+import {useTypeSelector} from "../hooks/useTypeSelector";
 
 const Authorization = () => {
     const [loginChek, setLoginChek] = useState(true)
-    const [createUser, setCreateUser] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [lastName, setLastName] = useState('')
     const [firstName, setFirstName] = useState('')
     const {login, registration, auth} = useAction()
-    const emailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        setEmail(e.target.value)
-    }
+    const {error, success} = useTypeSelector(state => state.user)
 
-    const passwordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        setPassword(e.target.value)
-    }
-
-    const lastNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        setLastName(e.target.value)
-    }
-
-    const firstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        setFirstName(e.target.value)
-    }
 
     useEffect(() => {
         auth()
     }, []);
-    const btnLogin = (e: React.FormEvent) => {
-        e.preventDefault()
-        login(email, password)
-    }
 
-    const btnRegistration = (e: React.FormEvent) => {
+
+
+    const btnLogin = async (e: React.FormEvent) => {
         e.preventDefault()
-        registration(lastName, firstName, email, password)
-        setLoginChek(true)
-        setCreateUser(true)
-        setTimeout(()=> {
-            setCreateUser(false)
-        }, 2000)
+
+
+        if (!email || !password) {
+            alert('Введите данные')
+            setEmail('')
+            setPassword('')
+        } else {
+            await login(email, password)
+            setLoginChek(true)
+            auth()
+            setEmail('')
+            setPassword('')
+        }
+    }
+    const btnRegistration = async (e: React.FormEvent) => {
+        e.preventDefault()
+        if (!lastName || !firstName || !email || !password) {
+            alert('Введите данные')
+            setLastName('')
+            setFirstName('')
+            setEmail('')
+            setPassword('')
+        } else {
+            await registration(lastName, firstName, email, password)
+            setLoginChek(true)
+            setEmail('')
+            setPassword('')
+        }
     }
 
     return (
@@ -56,10 +59,12 @@ const Authorization = () => {
                             className='flex-wrap w-[250px] mx-auto text-center border-amber-400 border-2 px-4 py-8 rounded-2xl'>
                             <h1 className='text-center mb-5'>Войти</h1>
                             <div className='mb-2'>
-                                <TextField id="outlined-basic" label="Email" variant="outlined" size="small" onChange={emailChange} value={email}/>
+                                <TextField id="outlined-basic" label="Email" variant="outlined" size="small"
+                                           onChange={(e) => setEmail(e.target.value)} value={email}/>
                             </div>
                             <div>
-                                <TextField id="outlined-basic" label="Пароль" variant="outlined" size="small" onChange={passwordChange} value={password}/>
+                                <TextField id="outlined-basic" label="Пароль" variant="outlined" size="small"
+                                           onChange={(e) => setPassword(e.target.value)} value={password}/>
                             </div>
                             <button onClick={() => setLoginChek(false)} className='flex justify-start mb-10'>
                                 <span
@@ -76,16 +81,19 @@ const Authorization = () => {
                             <div className=''>
                                 <div className='mb-2 mx-auto'>
                                     <TextField id="outlined-basic" label="Фамилия" variant="outlined"
-                                               size="small" onChange={lastNameChange} value={lastName}/>
+                                               size="small" onChange={(e) => setLastName(e.target.value)} value={lastName}/>
                                 </div>
                                 <div className='mb-2'>
-                                    <TextField id="outlined-basic" label="Имя" variant="outlined" size="small" onChange={firstNameChange} value={firstName}/>
+                                    <TextField id="outlined-basic" label="Имя" variant="outlined" size="small"
+                                               onChange={(e) => setFirstName(e.target.value)} value={firstName}/>
                                 </div>
                                 <div className='mb-2'>
-                                    <TextField id="outlined-basic" label="Email" variant="outlined" size="small" onChange={emailChange} value={email}/>
+                                    <TextField id="outlined-basic" label="Email" variant="outlined" size="small"
+                                               onChange={(e) => setEmail(e.target.value)} value={email}/>
                                 </div>
                                 <div>
-                                    <TextField id="outlined-basic" label="Пароль" variant="outlined" size="small" onChange={passwordChange} value={password}/>
+                                    <TextField id="outlined-basic" label="Пароль" variant="outlined" size="small"
+                                               onChange={(e) => setPassword(e.target.value)} value={password}/>
                                 </div>
                             </div>
 
@@ -102,7 +110,10 @@ const Authorization = () => {
                     )
             }
             {
-                createUser && <p className='text-center text-green-600'>Вы успешно зарегистрированы!</p>
+                error && <p className='text-center text-red-500 '>{error}</p>
+            }
+            {
+                success && <p className='text-center text-green-500'>{success}</p>
             }
         </div>
     );

@@ -11,9 +11,9 @@ interface ModalProps {
 const Modal = ({children, onClose, title}: ModalProps) => {
     return (
         <>
-            <div className='fixed bg-black/50 top-0 right-0 left-0 bottom-0' onClick={onClose}></div>
+            <div className='fixed bg-black/50 z-50 top-0 right-0 left-0 bottom-0' onClick={onClose}></div>
 
-            <div className='w-[500px] text-black p-5 rounded bg-white absolute top-[25%] left-1/2 -translate-x-1/2'>
+            <div className='w-[500px] z-[60] text-black p-5 rounded bg-white absolute top-[25%] left-1/2 -translate-x-1/2'>
                 <h1 className='text-center text-3xl mb-10'>{title}</h1>
                 {children}
             </div>

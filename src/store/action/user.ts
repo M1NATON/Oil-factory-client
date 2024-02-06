@@ -2,8 +2,8 @@ import {Dispatch} from "redux";
 import {IUser, UserAction, UserActionType} from "../../type/user";
 import axios from "axios";
 import {setUser} from "../reducers/userReducer";
+import {API} from "../../utils";
 
-const API = 'http://localhost:9001/api'
 
 export const login: any = (email: string, password: string) => {
     return async (dispatch: Dispatch<UserAction>) => {
@@ -16,10 +16,12 @@ export const login: any = (email: string, password: string) => {
 
             // @ts-ignore
             const token = response.data.token
-            if(token) {
+            if (token) {
+
                 // @ts-ignore
                 dispatch(setUser(response.data.user))
                 localStorage.setItem('token', token)
+
             } else {
                 console.log('Нет токена')
             }
@@ -37,7 +39,6 @@ export const login: any = (email: string, password: string) => {
 export const registration: any = (lastName: string, firstName: string, email: string, password: string) => {
     return async (dispatch: Dispatch<UserAction>) => {
         try {
-            console.log('lastName, firstName', lastName, firstName)
             const response = await axios.post<IUser>(API + '/users/register', {
                 lastName,
                 firstName,
@@ -45,10 +46,20 @@ export const registration: any = (lastName: string, firstName: string, email: st
                 password
             })
 
-            console.log(response.data)
+            dispatch({
+                type: UserActionType.FETCH_SUCCESS_USER,
+                // @ts-ignore
+                payload: response.data.message
+            })
         } catch (e) {
             // @ts-ignore
-            console.log(e.response.data.message)
+            dispatch({
+                type: UserActionType.FETCH_ERROR_USER,
+                // @ts-ignore
+                payload: e.response.data.message
+            })
+
+
         }
     }
 }
@@ -58,7 +69,7 @@ export const auth: any = () => {
     return async (dispatch: Dispatch<UserAction>) => {
         const token = localStorage.getItem('token')
 
-        if(!token) {
+        if (!token) {
             return
         }
         try {
